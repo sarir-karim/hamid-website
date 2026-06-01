@@ -83,7 +83,7 @@ export default function Header() {
 
         {/* Desktop Book Now Button */}
         <Link 
-          to="/contact"
+          to="/book-now"
           className="hidden md:inline-flex bg-green-900 text-white px-6 py-2 rounded hover:bg-green-800 transition-colors duration-200 font-medium text-sm"
           aria-label="Book a tour now"
         >

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { useServices, DEFAULT_SERVICES } from '../../hooks/useAPI'
 import { FaMountain, FaHiking,  FaUsers } from 'react-icons/fa'
-
+import { Link } from 'react-router-dom';
 import { GiJeep } from "react-icons/gi";
 
 export default function Services() {
@@ -103,13 +103,13 @@ export default function Services() {
 
           {/* CTA */}
           <div className="text-center mt-16">
-            <a
-              href="#contact"
+            <Link
+              to="book-now"
               className="inline-block bg-green-700 text-white px-8 py-3 rounded hover:bg-green-800 transition-colors duration-200 font-medium"
               role="button"
             >
               Book Your Experience
-            </a>
+            </Link>
           </div>
         </div>
       </section>

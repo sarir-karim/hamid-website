@@ -9,7 +9,7 @@ const Top = ({ title }) => {
       >
         <div className="absolute inset-0 bg-green-900 bg-opacity-50"></div>
         <div className="relative z-10 text-center text-white px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4"> {title}</h1>
+             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{title}</h1>
         </div>
       </section>
     </>

@@ -12,6 +12,7 @@ import TourDetails from './pages/Tours/TourDetails'
 import DestinationDetails from './pages/Destinations/DestinationDetails'
 import Programs from './pages/Programs/Programs'
 import Gallery from './pages/Gallery/Gallery'
+import BookNow from './pages/BookNow'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/destinations" element={<DestinationPage />} />
           <Route path="/destinations/:destinationId" element={<DestinationDetails />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/book-now" element={<BookNow />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

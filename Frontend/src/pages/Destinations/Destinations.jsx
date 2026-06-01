@@ -94,13 +94,13 @@ export default function Destinations() {
             <p className="text-gray-700 mb-6">
               Ready to explore your next adventure?
             </p>
-            <a
-              href="#tours"
+            <Link
+              to="/destinations"
               className="inline-block bg-green-700 text-white px-8 py-3 rounded hover:bg-green-800 transition-colors duration-200 font-medium"
               role="button"
             >
-              Plan Your Journey
-            </a>
+              View all Destinations
+            </Link>
           </div>
         </div>
       </section>
