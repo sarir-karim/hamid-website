@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async'
-import { useServices, DEFAULT_SERVICES } from '../hooks/useAPI'
+import { useServices, DEFAULT_SERVICES } from '../../hooks/useAPI'
 import { FaMountain, FaHiking,  FaUsers } from 'react-icons/fa'
 
 import { GiJeep } from "react-icons/gi";

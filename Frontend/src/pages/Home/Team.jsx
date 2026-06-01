@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
 
 export default function Team() {
   const teamMembers = [
@@ -116,13 +117,13 @@ export default function Team() {
           {/* Team CTA */}
           <div className="text-center mt-16">
            
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="inline-block bg-green-700 text-white px-8 py-3 rounded hover:bg-green-800 transition-colors duration-200 font-medium"
               role="button"
             >
               Get In Touch
-            </a>
+            </Link>
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
 
 export default function HeroSection() {
   return (
@@ -31,20 +32,20 @@ export default function HeroSection() {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#tours"
+            <Link
+              to="/tours"
               className="bg-green-700 hover:bg-green-800 text-white px-8 py-3 rounded font-semibold transition inline-block"
               role="button"
             >
               Explore Tours
-            </a>
-            <a
-              href="#contact"
+            </Link>
+            <Link
+              to="/contact"
               className="border-2 border-white hover:bg-white hover:text-gray-800 text-white px-8 py-3 rounded font-semibold transition inline-block"
               role="button"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </section>

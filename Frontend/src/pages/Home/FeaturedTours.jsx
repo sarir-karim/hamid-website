@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
-import { useFeaturedTours, DEFAULT_FEATURED_TOURS } from '../hooks/useAPI'
+import { Link, Links } from 'react-router-dom'
+import { useFeaturedTours, DEFAULT_FEATURED_TOURS } from '../../hooks/useAPI'
 
 export default function FeaturedTours() {
   // Fetch featured tours from API or use default fallback data
@@ -15,7 +16,7 @@ export default function FeaturedTours() {
       name: tour.title,
       description: tour.longDescription,
       image: tour.thumbnail,
-      url: `#${tour.id}`
+      url: `/tours/${tour.slug}`
     }))
   }
 
@@ -88,13 +89,12 @@ export default function FeaturedTours() {
                     <span className="text-gray-600 text-sm font-medium">
                       {tour.duration.days} Days
                     </span>
-                    <a
-                      href={`#${tour.id}`}
+                    <Link
+                      to={`/tours/${tour.slug}`}
                       className="text-green-700 font-medium hover:text-green-900 transition-colors duration-200 flex items-center gap-1"
-                      role="button"
                     >
                       View Details →
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </article>
@@ -104,13 +104,13 @@ export default function FeaturedTours() {
           {/* CTA */}
           <div className="text-center mt-16">
               
-            <a
-              href="#tours"
+            <Link
+              to="/tours"
               className="inline-block bg-green-700 text-white px-8 py-3 rounded hover:bg-green-800 transition-colors duration-200 font-medium"
               role="button"
             >
               Browse All Tours
-            </a>
+            </Link>
           </div>
         </div>
       </section>

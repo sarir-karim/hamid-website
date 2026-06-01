@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async'
-import { usePrograms, DEFAULT_PROGRAMS } from '../hooks/useAPI'
+import { usePrograms, DEFAULT_PROGRAMS } from '../../hooks/useAPI'
 
 export default function SpecializedPrograms() {
   // Fetch programs from API or use default fallback data

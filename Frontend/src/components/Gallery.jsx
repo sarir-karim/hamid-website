@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { useGallery, DEFAULT_GALLERY } from '../hooks/useAPI'
-
+import { Link } from 'react-router-dom'
 export default function Gallery() {
   // Fetch gallery images from API or use default fallback data
   const { data: apiGallery } = useGallery()
@@ -86,13 +86,13 @@ export default function Gallery() {
           {/* Gallery CTA */}
           <div className="text-center mt-16">
            
-            <a
-              href="#book"
+            <Link
+              to="/gallery"
               className="inline-block bg-green-700 text-white px-8 py-3 rounded hover:bg-green-800 transition-colors duration-200 font-medium"
               role="button"
             >
               See all photos →  
-            </a>
+            </Link>
           </div>
         </div>
       </section>
