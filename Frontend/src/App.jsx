@@ -10,7 +10,7 @@ import DestinationPage from './pages/Destinations/DestinationPage'
 import Tours from './pages/Tours/Tours'
 import TourDetails from './pages/Tours/TourDetails'
 import DestinationDetails from './pages/Destinations/DestinationDetails'
-import Programs from './pages/Programs/Programs'
+import HuntingTour from './pages/Programs/Programs'
 import Gallery from './pages/Gallery/Gallery'
 import BookNow from './pages/BookNow'
 
@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/tours/:tourSlug" element={<TourDetails />} />
-          <Route path="/programs" element={<Programs />} />
+          <Route path="/hunting-tour" element={<HuntingTour />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/about" element={<About />} />
           <Route path="/destinations" element={<DestinationPage />} />

@@ -9,6 +9,7 @@ import Testimonials from "./Testimonials";
 import Team from "./Team";
 import Gallery from "../../components/Gallery";
 import Destinations from "../Destinations/Destinations";
+import Partners from "./Partners";
 import Contact from "../Contact/Contact";
 
 export default function HomePage() {
@@ -33,6 +34,7 @@ export default function HomePage() {
       <Services />
       <FeaturedTours />
       <Destinations />
+      <Partners />
       {/* <SpecializedPrograms /> */}
       <WhyChooseUs />
       <Testimonials />
