@@ -137,7 +137,7 @@ export default function Testimonials() {
         </script>
       </Helmet>
 
-      <section className="py-16 bg-gray-50" aria-label="What Our Travelers Say">
+      <section className="py-16 bg-white" aria-label="What Our Travelers Say">
         <div className="max-w-6xl mx-auto px-6">
           {/* Section Header */}
           <div className="text-center mb-16">
@@ -213,7 +213,7 @@ export default function Testimonials() {
             {/* Previous Button */}
             <button
               onClick={handlePrev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 bg-green-700 text-white p-2 md:p-3 rounded-full hover:bg-green-800 transition-colors duration-200 z-10"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6  text-green-700 text-3xl p-2 md:p-3 rounded-full hover:bg-green-800 transition-colors duration-200 z-10"
               aria-label="Previous testimonials"
               title="Previous"
             >
@@ -223,7 +223,7 @@ export default function Testimonials() {
             {/* Next Button */}
             <button
               onClick={handleNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 bg-green-700 text-white p-2 md:p-3 rounded-full hover:bg-green-800 transition-colors duration-200 z-10"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 text-green-700 text-3xl p-2 md:p-3 rounded-full hover:bg-green-800 transition-colors duration-200 z-10"
               aria-label="Next testimonials"
               title="Next"
             >
@@ -258,7 +258,7 @@ export default function Testimonials() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-16 pt-12 border-t border-gray-200 flex justify-center gap-8 flex-wrap">
+          {/* <div className="mt-16 pt-12 border-t border-gray-200 flex justify-center gap-8 flex-wrap">
             <div className="text-center">
               <div className="text-3xl font-bold text-green-700 mb-2">4.9/5</div>
               <p className="text-gray-600 text-sm">Average Rating</p>
@@ -271,7 +271,7 @@ export default function Testimonials() {
               <div className="text-3xl font-bold text-green-700 mb-2">98%</div>
               <p className="text-gray-600 text-sm">Satisfaction Rate</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </>

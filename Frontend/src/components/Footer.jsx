@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaYoutube, FaLinkedin } from 'react-icons/fa'
+import logo from '../assets/logo.jpeg'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -10,8 +11,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Section */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-green-500 text-3xl font-bold">▲</span>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src={logo}
+                alt="Mountain Soul Adventure logo"
+                className="h-12 w-12 rounded-full object-cover border border-green-500/40"
+              />
               <h3 className="text-white text-xl font-bold">Mountain Soul</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">

@@ -1,8 +1,15 @@
 import { Helmet } from "react-helmet-async";
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { TOUR_DATA } from "./tourData";
 import Top from "../../components/Top";
+
+const TOUR_TYPE_ALIASES = {
+  "Cultural & Heritage Tours": ["Cultural Tours"],
+  "Customized Private Tours": ["Cultural Tours", "Trekking & Hiking", "Jeep Safaris"],
+  "Corporate & Group Tours": ["Cultural Tours", "Jeep Safaris", "Mountaineering"],
+  "Trekking": ["Trekking & Hiking"],
+  "Expeditions": ["Mountaineering"],
+};
 
 function TourCard({ tour }) {
   return (
@@ -44,103 +51,38 @@ function TourCard({ tour }) {
 }
 
 export default function Tours() {
-  const [query, setQuery] = useState("");
-  const [destination, setDestination] = useState("All");
-  const [type, setType] = useState("All");
+  const location = useLocation();
+  const selectedType = new URLSearchParams(location.search).get("type") || "";
 
-  const destinations = useMemo(
-    () => ["All", ...new Set(TOUR_DATA.map((t) => t.destination))],
-    [],
-  );
-  const types = useMemo(
-    () => ["All", ...new Set(TOUR_DATA.map((t) => t.type))],
-    [],
-  );
+  const pageTitleMap = {
+    "Cultural Tours": "Cultural Tours",
+    "Trekking & Hiking": "Trekking",
+    Mountaineering: "Expeditions",
+    "Customized Private Tours": "Customized Private Tours",
+    "Corporate & Group Tours": "Corporate & Group Tours",
+  };
 
-  const filtered = useMemo(() => {
-    return TOUR_DATA.filter((t) => {
-      const matchesQuery =
-        query.trim() === "" ||
-        t.title.toLowerCase().includes(query.toLowerCase());
-      const matchesDestination =
-        destination === "All" || t.destination === destination;
-      const matchesType = type === "All" || t.type === type;
-      return matchesQuery && matchesDestination && matchesType;
-    });
-  }, [query, destination, type]);
+  const pageTitle = pageTitleMap[selectedType] || "Our Tours";
+
+  const filtered = TOUR_DATA.filter((tour) => {
+    if (!selectedType) return true;
+
+    const aliases = TOUR_TYPE_ALIASES[selectedType] || [selectedType];
+    return aliases.includes(tour.type);
+  });
 
   return (
     <>
       <Helmet>
-        <title>Tours - Mountain Soul Adventure</title>
-        <meta name="description" content="Explore our tours across Pakistan." />
+        <title>{pageTitle} - Mountain Soul Adventure</title>
+        <meta
+          name="description"
+          content={selectedType ? `Explore ${pageTitle.toLowerCase()} in Pakistan.` : "Explore our tours across Pakistan."}
+        />
       </Helmet>
-     <Top title="Our Tours"/>
+      <Top title={pageTitle} />
       <section className="py-12 bg-gray-50" aria-label="Tours">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Search
-                </label>
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search tours"
-                  className="mt-1 block w-full border border-gray-200 rounded p-2"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Destination
-                </label>
-                <select
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  className="mt-1 block w-full border border-gray-200 rounded p-2 bg-white"
-                >
-                  {destinations.map((d) => (
-                    <option key={d} value={d}>
-                      {d}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Tour Type
-                </label>
-                <select
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-                  className="mt-1 block w-full border border-gray-200 rounded p-2 bg-white"
-                >
-                  {types.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="text-right md:text-left">
-                <button
-                  onClick={() => {
-                    setQuery("");
-                    setDestination("All");
-                    setType("All");
-                  }}
-                  className="mt-1 inline-flex items-center px-4 py-2 border border-gray-300 rounded text-sm"
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-          </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((tour) => (
               <TourCard key={tour.id} tour={tour} />
@@ -149,7 +91,7 @@ export default function Tours() {
 
           {filtered.length === 0 && (
             <p className="text-center text-gray-600 mt-8">
-              No tours match your search.
+              No tours available in this category yet.
             </p>
           )}
         </div>

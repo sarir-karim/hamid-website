@@ -1,33 +1,42 @@
-import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { useDestinations, DEFAULT_DESTINATIONS } from '../../hooks/useAPI'
 import Top from '../../components/Top'
 
 export default function DestinationPage() {
-  const [regionFilter, setRegionFilter] = useState('All')
   const { data: apiDestinations, loading, error } = useDestinations()
   const destinations = apiDestinations || DEFAULT_DESTINATIONS
 
-  const regions = ['All', ...Array.from(new Set(destinations.map((item) => item.region).filter(Boolean)))]
-  const filteredDestinations = regionFilter === 'All'
-    ? destinations
-    : destinations.filter((item) => item.region === regionFilter)
+  const destinationCards = [
+    'Karakoram Range',
+    'K2 Region',
+    'Hunza Valley',
+    'Shimshal Valley',
+    'Passu',
+    'Skardu & Baltistan',
+    'Chitral & Hindu Kush',
+    'Selected regions of Kashmir and Balochistan'
+  ].map((name) => ({
+    id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    name,
+    description: 'Explore breathtaking mountain landscapes, remote valleys, and unforgettable adventure routes tailored to the region.',
+    thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    region: name,
+    slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  }))
 
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: filteredDestinations.map((destination, index) => ({
+    itemListElement: destinationCards.map((destination, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: destination.name,
-      description: destination.longDescription,
+      description: destination.description,
       image: destination.thumbnail,
-      url: `/destinations/${destination.slug || destination.id}`
+      url: `/destinations/${destination.slug}`
     }))
   }
-
-  const heroImage = destinations[0]?.image || destinations[0]?.thumbnail || ''
 
   return (
     <>
@@ -48,30 +57,8 @@ export default function DestinationPage() {
 
       <Top title="Our Destinations" />
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-4">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="sm:flex sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-emerald-600">Featured Destinations</p>
-              <h2 className="mt-3 text-3xl font-bold text-gray-900">Travel-worthy regions with guided support</h2>
-              <p className="mt-4 max-w-2xl text-gray-600">
-                Choose from our carefully selected destinations, each designed for immersive adventure with local guides and sustainable experiences.
-              </p>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-2 sm:mt-0">
-              {regions.map((region) => (
-                <button
-                  key={region}
-                  type="button"
-                  onClick={() => setRegionFilter(region)}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${regionFilter === region ? 'bg-emerald-700 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                >
-                  {region}
-                </button>
-              ))}
-            </div>
-          </div>
 
           {error && (
             <div className="mt-10 rounded-xl border border-red-200 bg-red-50 p-6 text-red-800">
@@ -80,10 +67,10 @@ export default function DestinationPage() {
           )}
 
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredDestinations.map((destination) => (
+            {destinationCards.map((destination) => (
               <Link
                 key={destination.id}
-                to={`/destinations/${destination.slug || destination.id}`}
+                to={`/destinations/${destination.slug}`}
                 className="group block overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="relative h-64 overflow-hidden">
@@ -95,7 +82,7 @@ export default function DestinationPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                   <div className="absolute bottom-4 left-4 text-white">
-                    <p className="text-sm uppercase tracking-[0.25em] text-gray-200">{destination.region}</p>
+                    <p className="text-sm uppercase tracking-[0.25em] text-gray-200">Destination</p>
                     <h3 className="mt-2 text-2xl font-semibold">{destination.name}</h3>
                   </div>
                 </div>
@@ -103,7 +90,7 @@ export default function DestinationPage() {
                 <div className="space-y-4 p-6">
                   <p className="text-sm text-gray-600 line-clamp-3">{destination.description}</p>
                   <div className="flex items-center justify-between gap-4 text-sm text-gray-500">
-                    <span className="inline-flex items-center gap-2">📅 {destination.bestSeason}</span>
+                    <span className="inline-flex items-center gap-2">📍 Adventure Ready</span>
                     <span className="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-emerald-700">Explore</span>
                   </div>
                 </div>
@@ -113,7 +100,6 @@ export default function DestinationPage() {
 
           <div className="mt-12 flex items-center justify-center gap-3 text-sm text-gray-500">
             {loading && <span>Loading newest destinations...</span>}
-            {!loading && !filteredDestinations.length && <span>No destinations match this region.</span>}
           </div>
         </div>
       </section>

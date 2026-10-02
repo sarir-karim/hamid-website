@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { servicesAPI, destinationsAPI, toursAPI, programsAPI, galleryAPI, aboutAPI } from '../services/apiService'
+import { LOCAL_GALLERY_IMAGES } from '../constants/galleryData'
 
 /**
  * Generic data fetching hook
@@ -151,80 +152,7 @@ export const useProgram = (programId) => {
  * Default gallery images data structure
  * Used as fallback when API is unavailable
  */
-export const DEFAULT_GALLERY = [
-  {
-    id: 'gallery-1',
-    title: 'Mountain Trekkers',
-    description: 'Group trekking at high altitude with stunning mountain views',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop',
-    category: 'trekking',
-    alt: 'Mountain trekkers on a high altitude trail with snowy peaks in background'
-  },
-  {
-    id: 'gallery-2',
-    title: 'Local Guide',
-    description: 'Expert local guide leading adventure',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop',
-    category: 'people',
-    alt: 'Experienced local mountain guide in traditional attire'
-  },
-  {
-    id: 'gallery-3',
-    title: 'Sunset Camping',
-    description: 'Camping under the stars with mountain backdrop',
-    image: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=300&h=300&fit=crop',
-    category: 'camping',
-    alt: 'Sunset view with camping tents and mountains in the distance'
-  },
-  {
-    id: 'gallery-4',
-    title: 'Team Celebration',
-    description: 'Happy team celebrating at summit',
-    image: 'https://images.unsplash.com/photo-1517456213526-c1e2b7c3dbbe?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1517456213526-c1e2b7c3dbbe?w=300&h=300&fit=crop',
-    category: 'team',
-    alt: 'Adventure group celebrating together at mountain summit'
-  },
-  {
-    id: 'gallery-5',
-    title: 'Traditional Food',
-    description: 'Local cuisine and traditional meals',
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300&h=300&fit=crop',
-    category: 'culture',
-    alt: 'Traditional Pakistani dishes and local cuisine'
-  },
-  {
-    id: 'gallery-6',
-    title: 'Desert Adventure',
-    description: 'Jeep safari through scenic landscapes',
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&h=300&fit=crop',
-    category: 'safari',
-    alt: 'Jeep safari vehicle driving through desert landscape'
-  },
-  {
-    id: 'gallery-7',
-    title: 'Snow Peak Trek',
-    description: 'Trekking through snowy mountain passes',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop',
-    category: 'trekking',
-    alt: 'Trekkers on snowy mountain with colorful outfits'
-  },
-  {
-    id: 'gallery-8',
-    title: 'Night Sky Camping',
-    description: 'Stargazing under pristine night sky',
-    image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=500&h=400&fit=crop',
-    thumbnail: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=300&h=300&fit=crop',
-    category: 'camping',
-    alt: 'Camping tent lit up under starry night sky'
-  }
-]
+export const DEFAULT_GALLERY = LOCAL_GALLERY_IMAGES
 
 // ============================================
 // GALLERY HOOKS
@@ -237,7 +165,10 @@ export const DEFAULT_GALLERY = [
  * @returns {Object}
  */
 export const useGallery = (page = 1, limit = 12) => {
-  return useFetch(() => galleryAPI.getAllGalleryImages(page, limit), true, DEFAULT_GALLERY)
+  return useFetch(async () => {
+    const apiGallery = await galleryAPI.getAllGalleryImages(page, limit)
+    return [...LOCAL_GALLERY_IMAGES, ...apiGallery]
+  }, true, DEFAULT_GALLERY)
 }
 
 /**

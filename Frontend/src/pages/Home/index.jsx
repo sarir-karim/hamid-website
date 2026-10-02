@@ -34,13 +34,13 @@ export default function HomePage() {
       <Services />
       <FeaturedTours />
       <Destinations />
-      <Partners />
       {/* <SpecializedPrograms /> */}
       <WhyChooseUs />
       <Testimonials />
       <Team />
       <Gallery />
-      <Contact/>
+      <Partners />
+      {/* <Contact/> */}
     </>
   );
 }

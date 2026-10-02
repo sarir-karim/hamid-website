@@ -5,6 +5,7 @@ export default function Gallery() {
   // Fetch gallery images from API or use default fallback data
   const { data: apiGallery } = useGallery()
   const galleryImages = apiGallery || DEFAULT_GALLERY
+  const galleryPreview = galleryImages.slice(0, 10)
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -43,17 +44,19 @@ export default function Gallery() {
             <h2 className="text-4xl md:text-4xl font-bold text-gray-900 mb-3">
               Gallery
             </h2>
-            <p className="text-lg text-blue-600">
+            <p className="text-lg text-gray-600">
               Moments captured from our adventures
             </p>
           </div>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {galleryImages.map((image) => (
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {galleryPreview.map((image, index) => (
               <article 
                 key={image.id}
-                className="group relative h-64 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className={`group relative h-64 cursor-pointer overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl ${
+                  index >= 6 ? 'hidden lg:block' : index >= 4 ? 'hidden md:block lg:hidden' : ''
+                }`}
               >
                 {/* Image */}
                 <div className="relative w-full h-full overflow-hidden">

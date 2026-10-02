@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import TawkChat from './components/TawkChat'
 import HomePage from './pages/Home'
 import About from './pages/About/About'
 import ContactPage from './pages/Contact/ContactPage'
@@ -19,6 +20,7 @@ function App() {
     <>
       <Header />
       <ScrollToTop />
+      <TawkChat />
 
       <main className="min-h-[calc(100vh-120px)]">
         <Routes>

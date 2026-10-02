@@ -1,12 +1,8 @@
  import { Helmet } from 'react-helmet-async'
 import { useAbout } from '../../hooks/useAPI'
 import { DEFAULT_ABOUT_DATA } from './aboutData'
-import AboutHero from './AboutHero'
+import Top from '../../components/Top'
 import StorySection from './StorySection'
-import MissionVisionSection from './MissionVisionSection'
-import ValuesSection from './ValuesSection'
-import StatsSection from './StatsSection'
-import CTASection from './CTASection'
 import Team from '../Home/Team'
 
 // Timeline removed per request
@@ -74,14 +70,21 @@ export default function About() {
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       </Helmet>
 
-      <AboutHero />
+      <Top title="About Us" />
       <StorySection story={aboutData.story} />
-      <MissionVisionSection mission={aboutData.mission} vision={aboutData.vision} />
-      <ValuesSection values={aboutData.values} />
-      <StatsSection stats={aboutData.stats} />
-      <Team />
-
-      <CTASection />
+      <section className="bg-gray-50 py-14 md:py-20" aria-label={`About ${aboutData.companyName}`}>
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="mb-8 text-center text-3xl font-bold text-green-800 md:text-4xl">
+            About {aboutData.companyName}
+          </h2>
+          <div className="space-y-5 text-base leading-8 text-gray-700 md:text-lg">
+            <p className="font-medium text-gray-900">{aboutData.tagline}</p>
+            <p>{aboutData.mission}</p>
+            <p>{aboutData.vision}</p>
+          </div>
+        </div>
+      </section>
+      <Team title="Meet Our Team" aboutPage />
     </>
   )
 }
