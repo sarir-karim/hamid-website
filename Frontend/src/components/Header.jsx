@@ -101,7 +101,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <header className="bg-white shadow-sm sticky top-0 z-50 py-2=">
+      <header className="bg-white shadow-sm sticky top-0 z-50 py-2">
         <div className="flex justify-between items-center py-0 px-4 md:px-10">
         {/* Logo */}
         <Link 
